@@ -10,6 +10,9 @@ import (
 	"loadbalancer/services/loadbalancer"
 	"loadbalancer/services/processor"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
 )
 
 func main() {
@@ -29,8 +32,33 @@ func main() {
 		healthcheck,
 		createApplicationAddressesMap(appAddresses),
 		appClient)
+
+	// run periodic healthcheck
+	done := make(chan struct{})
+	healthcheck.PeriodicalCheck(done)
+
+	// register http handler
 	handler := handler.New(processor)
 	http.HandleFunc("/", handler.Post)
+
+	// graceful shutdown
+	gracefulShutdown(done)
+
+	// listen to http request
+	err := http.ListenAndServe(fmt.Sprintf(":%s", config.GetAppPort()), nil)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func gracefulShutdown(done chan<- struct{}) {
+	go func(done chan<- struct{}) {
+		s := make(chan os.Signal, 1)
+		signal.Notify(s, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
+		<-s
+
+		done <- struct{}{}
+	}(done)
 }
 
 func createApplicationServiceAddresses(config *configs.Config) []*model.ApplicationServiceAddress {

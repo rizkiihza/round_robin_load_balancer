@@ -34,7 +34,7 @@ func New(
 	}
 }
 
-func (p *PeriodicHealthcheck) PeriodicalCheck(done <-chan int) {
+func (p *PeriodicHealthcheck) PeriodicalCheck(done <-chan struct{}) {
 	go func() {
 		for {
 			select {

@@ -7,6 +7,7 @@ import (
 )
 
 type Config struct {
+	appPort                     string
 	pingTimeoutMs               int
 	checkPeriodMs               int
 	applicationServiceHosts     []string
@@ -15,6 +16,7 @@ type Config struct {
 }
 
 func New() *Config {
+	appPort := os.Getenv("APP_PORT")
 	pingTimeoutMsString := os.Getenv("PING_TIMEOUT_MS")
 	checkPeriodMsString := os.Getenv("CHECK_PERIOD_MS")
 	applicationServiceHosts := strings.Split(os.Getenv("APPLICATION_SERVICE_HOSTS"), ",")
@@ -30,12 +32,17 @@ func New() *Config {
 		panic(err)
 	}
 	return &Config{
+		appPort:                     appPort,
 		pingTimeoutMs:               pingTimeoutMs,
 		checkPeriodMs:               checkPeriodMs,
 		applicationServiceHosts:     applicationServiceHosts,
 		applicationServiceCallPaths: applicationServiceCallPaths,
 		applicationServicePingPaths: applicationServicePingPaths,
 	}
+}
+
+func (c *Config) GetAppPort() string {
+	return c.appPort
 }
 
 func (c *Config) GetPingTimeoutMs() int {
