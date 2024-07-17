@@ -34,14 +34,14 @@ func New(
 	}
 }
 
-func (p *PeriodicHealthcheck) PeriodicalCheck(ctx context.Context) {
+func (p *PeriodicHealthcheck) PeriodicalCheck(done <-chan int) {
 	go func() {
 		for {
 			select {
-			case <-ctx.Done():
+			case <-done:
 				return
 			case <-time.After(time.Duration(p.checkPeriodMs) * time.Millisecond):
-				p.check(ctx)
+				p.check(context.Background())
 			}
 		}
 	}()

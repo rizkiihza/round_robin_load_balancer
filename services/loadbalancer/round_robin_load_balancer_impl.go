@@ -18,7 +18,7 @@ func New(appAddress []*model.ApplicationServiceAddress,
 	return &RoundRobinLoadBalancerImpl{
 		appAddress:     appAddress,
 		totalAppNumber: totalAppNumber,
-		index:          1,
+		index:          -1,
 	}
 }
 

@@ -7,12 +7,16 @@ import (
 	"net/http"
 )
 
-type ApplicationServiceImpl struct {
+type ApplicationServiceClientImpl struct {
 }
 
-func (as *ApplicationServiceImpl) Call(ctx context.Context, request *http.Request, appService *model.ApplicationServiceAddress) (*http.Response, error) {
+func New() *ApplicationServiceClientImpl {
+	return &ApplicationServiceClientImpl{}
+}
+
+func (as *ApplicationServiceClientImpl) Call(ctx context.Context, request *http.Request, appService *model.ApplicationServiceAddress) (*http.Response, error) {
 	url := fmt.Sprintf("%s%s", appService.GetHost(), appService.GetCallPath())
-	req, err := http.NewRequestWithContext(ctx, "GET", url, request.Body)
+	req, err := http.NewRequestWithContext(ctx, "POST", url, request.Body)
 	if err != nil {
 		return nil, err
 	}
@@ -24,7 +28,7 @@ func (as *ApplicationServiceImpl) Call(ctx context.Context, request *http.Reques
 	return response, nil
 }
 
-func (as *ApplicationServiceImpl) Ping(ctx context.Context, appService *model.ApplicationServiceAddress) (*http.Response, error) {
+func (as *ApplicationServiceClientImpl) Ping(ctx context.Context, appService *model.ApplicationServiceAddress) (*http.Response, error) {
 	url := fmt.Sprintf("%s%s", appService.GetHost(), appService.GetCallPath())
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {

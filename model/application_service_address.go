@@ -7,7 +7,7 @@ type ApplicationServiceAddress struct {
 	pingPath string
 }
 
-func New(key string, host string, callPath string, pingPath string) *ApplicationServiceAddress {
+func NewApplicationServiceAddress(key string, host string, callPath string, pingPath string) *ApplicationServiceAddress {
 	return &ApplicationServiceAddress{
 		key:      key,
 		host:     host,
