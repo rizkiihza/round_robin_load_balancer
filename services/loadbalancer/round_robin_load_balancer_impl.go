@@ -12,12 +12,10 @@ type RoundRobinLoadBalancerImpl struct {
 	index          int64
 }
 
-func New(appAddress []*model.ApplicationServiceAddress,
-	totalAppNumber int64) *RoundRobinLoadBalancerImpl {
-
+func New(appAddress []*model.ApplicationServiceAddress) *RoundRobinLoadBalancerImpl {
 	return &RoundRobinLoadBalancerImpl{
 		appAddress:     appAddress,
-		totalAppNumber: totalAppNumber,
+		totalAppNumber: int64(len(appAddress)),
 		index:          -1,
 	}
 }
@@ -38,8 +36,9 @@ func (lb *RoundRobinLoadBalancerImpl) getNextKey() string {
 	// add one to atomic int64
 	value := atomic.AddInt64(&lb.index, 1)
 
-	// if value more than ten times total, reduce by total
-	if value > 10*lb.totalAppNumber {
+	// if value more than a hundred times total app number, reduce by total
+	// we do this to have a throttling on max value of the atomic int64
+	if value > 100*lb.totalAppNumber {
 		atomic.AddInt64(&lb.index, -lb.totalAppNumber)
 	}
 

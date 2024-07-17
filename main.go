@@ -25,8 +25,7 @@ func main() {
 		config.GetPingTimeoutMs(),
 		config.GetCheckPeriodMs())
 	loadbalancer := loadbalancer.New(
-		appAddresses,
-		int64(len(config.GetApplicationServiceHosts())))
+		appAddresses)
 	processor := processor.New(
 		loadbalancer,
 		healthcheck,
