@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app-service-0:
+    build: ./simple_apis
+    ports:
+      - 8081:8081
+    environment:
+      - APP_PORT=8081
+  app-service-1:
+    build: ./simple_apis
+    ports:
+      - 8082:8082
+    environment:
+      - APP_PORT=8082
+  app-service-2:
+    build: ./simple_apis
+    ports:
+      - 8083:8083
+    environment:
+      - APP_PORT=8083
+  app-service-3:
+    build: ./simple_apis
+    ports:
+      - 8084:8084
+    environment:
+      - APP_PORT=8084

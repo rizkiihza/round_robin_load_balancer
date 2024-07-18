@@ -23,6 +23,7 @@ func (h *Handler) HandleRequest(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("500 - Internal Server error"))
 		return
 	}
+	defer response.Body.Close()
+
 	io.Copy(w, response.Body)
-	response.Body.Close()
 }

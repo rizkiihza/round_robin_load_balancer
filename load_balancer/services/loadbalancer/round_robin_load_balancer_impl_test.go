@@ -116,16 +116,19 @@ func TestRoundRobinLoadBalancerImpl_GetNextServiceKey(t *testing.T) {
 			}(result_channel, lb, healthyServiceKeys)
 		}
 
+		// set timeout and close channel
 		go func(result_channel chan<- string) {
 			time.Sleep(3 * time.Second)
 			close(result_channel)
 		}(result_channel)
-		result_slice := make([]string, 0)
 
+		// combine all result from all goroutine into one list
+		result_slice := make([]string, 0)
 		for val := range result_channel {
 			result_slice = append(result_slice, val)
 		}
 
+		// get count map
 		map_count := make(map[string]int)
 		for _, val := range result_slice {
 			if _, ok := map_count[val]; !ok {
@@ -137,6 +140,7 @@ func TestRoundRobinLoadBalancerImpl_GetNextServiceKey(t *testing.T) {
 		min_value := -1
 		max_value := -1
 
+		// check the min value and max value of count
 		for _, v := range map_count {
 			if min_value == -1 || v < min_value {
 				min_value = v

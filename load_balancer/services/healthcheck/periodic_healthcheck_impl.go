@@ -4,10 +4,15 @@ import (
 	"context"
 	"loadbalancer/clients"
 	"loadbalancer/model"
+	"log"
 	"net/http"
+	"os"
+	"strings"
 	"sync"
 	"time"
 )
+
+var LOGGER = log.New(os.Stdout, "[HealthCheck] INFO:", log.Ldate)
 
 type PeriodicHealthcheck struct {
 	appAddresses          []*model.ApplicationServiceAddress
@@ -39,9 +44,15 @@ func (p *PeriodicHealthcheck) PeriodicalCheck(done <-chan struct{}) {
 		for {
 			select {
 			case <-done:
+				LOGGER.Println("got done signal")
 				return
 			case <-time.After(time.Duration(p.checkPeriodMs) * time.Millisecond):
 				p.check(context.Background())
+				if len(p.healthyAppServiceKeys) > 0 {
+					LOGGER.Printf("done doing periodic health check, healthy services: %s", strings.Join(p.healthyAppServiceKeys, ","))
+				} else {
+					LOGGER.Println("done doing checking: no healthy service")
+				}
 			}
 		}
 	}()

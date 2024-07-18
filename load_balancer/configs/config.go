@@ -15,6 +15,24 @@ type Config struct {
 	applicationServicePingPaths []string
 }
 
+func NewStub(
+	appPort string,
+	pingTimeoutMs int,
+	checkPeriodMs int,
+	applicationServiceHosts []string,
+	applicationServiceCallPaths []string,
+	applicationServicePingPaths []string) *Config {
+
+	return &Config{
+		appPort:                     appPort,
+		pingTimeoutMs:               pingTimeoutMs,
+		checkPeriodMs:               checkPeriodMs,
+		applicationServiceHosts:     applicationServiceHosts,
+		applicationServiceCallPaths: applicationServiceCallPaths,
+		applicationServicePingPaths: applicationServicePingPaths,
+	}
+}
+
 func New() *Config {
 	appPort := os.Getenv("APP_PORT")
 	pingTimeoutMsString := os.Getenv("PING_TIMEOUT_MS")
