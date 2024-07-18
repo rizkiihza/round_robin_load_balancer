@@ -38,7 +38,7 @@ func main() {
 
 	// register http handler
 	handler := handler.New(processor)
-	http.HandleFunc("/", handler.Post)
+	http.HandleFunc("/", handler.HandleRequest)
 
 	// graceful shutdown
 	gracefulShutdown(done)

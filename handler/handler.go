@@ -16,13 +16,13 @@ func New(processor processor.Processor) *Handler {
 	}
 }
 
-func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) HandleRequest(w http.ResponseWriter, r *http.Request) {
 	response, err := h.processor.ForwardRequest(r.Context(), r)
 	if err != nil {
 		w.WriteHeader(500)
 		w.Write([]byte("500 - Internal Server error"))
-	} else {
-		io.Copy(w, response.Body)
-		response.Body.Close()
+		return
 	}
+	io.Copy(w, response.Body)
+	response.Body.Close()
 }

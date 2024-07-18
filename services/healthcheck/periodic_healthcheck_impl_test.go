@@ -102,7 +102,7 @@ func TestPeriodicHealthcheck_PeriodicalCheck(t *testing.T) {
 		p := &PeriodicHealthcheck{
 			appAddresses:          addresses,
 			appClient:             appClient,
-			healthyAppServiceKeys: make([]string, 0),
+			healthyAppServiceKeys: []string{"app_service-0", "app_service-1", "app_service-2"},
 			pingTimeoutMs:         100,
 			checkPeriodMs:         100,
 			rwMutex:               &sync.RWMutex{},

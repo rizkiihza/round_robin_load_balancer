@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"loadbalancer/services/processor/mock_processor"
+	mock_processor "loadbalancer/services/processor/mock"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -12,7 +12,7 @@ import (
 	"github.com/golang/mock/gomock"
 )
 
-func TestHandler_Post(t *testing.T) {
+func TestHandler_HandleRequest(t *testing.T) {
 	t.Run("500 response from application service", func(t *testing.T) {
 		processor := mock_processor.NewMockProcessor(gomock.NewController(t))
 
@@ -24,7 +24,7 @@ func TestHandler_Post(t *testing.T) {
 
 		w := httptest.NewRecorder()
 		r := httptest.NewRequest("GET", "localhost:8000", nil)
-		h.Post(w, r)
+		h.HandleRequest(w, r)
 		res := w.Result()
 		data, err := io.ReadAll(res.Body)
 		defer res.Body.Close()
@@ -52,7 +52,7 @@ func TestHandler_Post(t *testing.T) {
 
 		w := httptest.NewRecorder()
 		r := httptest.NewRequest("GET", "localhost:8000", nil)
-		h.Post(w, r)
+		h.HandleRequest(w, r)
 		res := w.Result()
 		data, err := io.ReadAll(res.Body)
 		defer res.Body.Close()
