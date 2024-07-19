@@ -39,13 +39,11 @@ func (as *ApplicationServiceClientImpl) Ping(ctx context.Context, appService *mo
 	url := fmt.Sprintf("%s%s", appService.GetHost(), appService.GetPingPath())
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
 	if err != nil {
-		LOGGER.Println("got error when creating request", err.Error())
 		return nil, err
 	}
 
 	response, err := http.DefaultClient.Do(req)
 	if err != nil {
-		LOGGER.Println("got error when doing http request", err.Error())
 		return nil, err
 	}
 	return response, nil

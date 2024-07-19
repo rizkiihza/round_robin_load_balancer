@@ -3,9 +3,12 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 )
+
+var LOGGER = log.New(os.Stdout, "INFO:", log.Ldate)
 
 func ping(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(200)
@@ -13,6 +16,8 @@ func ping(w http.ResponseWriter, req *http.Request) {
 }
 
 func call(w http.ResponseWriter, req *http.Request) {
+	port := os.Getenv("APP_PORT")
+	LOGGER.Println("got a call request in port: ", port)
 	w.WriteHeader(200)
 	io.Copy(w, req.Body)
 }
