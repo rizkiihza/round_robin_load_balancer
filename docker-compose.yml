@@ -22,6 +22,17 @@ services:
   app-service-3:
     build: ./simple_apis
     ports:
-      - 8084:8084
+      - 8090:8090
     environment:
-      - APP_PORT=8084
+      - APP_PORT=8090
+  load-balancer-round-robin:
+    build: ./load_balancer
+    ports:
+      - 9000:9000
+    environment:
+      - APP_PORT=9000
+      - PING_TIMEOUT_MS=100
+      - CHECK_PERIOD_MS=100
+      - APPLICATION_SERVICE_HOSTS=http://app-service-0:8081,http://app-service-1:8082,http://app-service-2:8083,http://app-service-3:8090
+      - APPLICATION_SERVICE_CALL_PATHS=/call,/call,/call,/call
+      - APPLICATION_SERVICE_PING_PATHS=/ping,/ping,/ping,/ping

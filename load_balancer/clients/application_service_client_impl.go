@@ -43,7 +43,6 @@ func (as *ApplicationServiceClientImpl) Ping(ctx context.Context, appService *mo
 		return nil, err
 	}
 
-	LOGGER.Printf("http request call to %s", url)
 	response, err := http.DefaultClient.Do(req)
 	if err != nil {
 		LOGGER.Println("got error when doing http request", err.Error())

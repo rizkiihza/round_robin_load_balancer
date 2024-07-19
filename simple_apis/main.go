@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 )
@@ -9,7 +10,11 @@ import (
 func ping(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(200)
 	w.Write([]byte("Pong\n"))
-	req.Body.Close()
+}
+
+func call(w http.ResponseWriter, req *http.Request) {
+	w.WriteHeader(200)
+	io.Copy(w, req.Body)
 }
 
 func main() {
@@ -18,5 +23,6 @@ func main() {
 		port = "9000"
 	}
 	http.HandleFunc("/ping", ping)
+	http.HandleFunc("/call", call)
 	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }

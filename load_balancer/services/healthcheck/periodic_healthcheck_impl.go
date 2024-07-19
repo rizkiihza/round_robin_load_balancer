@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strings"
 	"sync"
 	"time"
 )
@@ -48,11 +47,6 @@ func (p *PeriodicHealthcheck) PeriodicalCheck(done <-chan struct{}) {
 				return
 			case <-time.After(time.Duration(p.checkPeriodMs) * time.Millisecond):
 				p.check(context.Background())
-				if len(p.healthyAppServiceKeys) > 0 {
-					LOGGER.Printf("done doing periodic health check, healthy services: %s", strings.Join(p.healthyAppServiceKeys, ","))
-				} else {
-					LOGGER.Println("done doing checking: no healthy service")
-				}
 			}
 		}
 	}()
