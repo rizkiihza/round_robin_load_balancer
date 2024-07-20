@@ -1,34 +1,24 @@
-version: '3.8'
-
+---
 services:
   app-service-0:
     build: ./simple_apis
-    ports:
-      - 8081:8081
-    environment:
-      - APP_PORT=8081
+    ports: [8081:8081]
+    environment: [APP_PORT=8081]
   app-service-1:
     build: ./simple_apis
-    ports:
-      - 8082:8082
-    environment:
-      - APP_PORT=8082
+    ports: [8082:8082]
+    environment: [APP_PORT=8082]
   app-service-2:
     build: ./simple_apis
-    ports:
-      - 8083:8083
-    environment:
-      - APP_PORT=8083
+    ports: [8083:8083]
+    environment: [APP_PORT=8083]
   app-service-3:
     build: ./simple_apis
-    ports:
-      - 8090:8090
-    environment:
-      - APP_PORT=8090
+    ports: [8090:8090]
+    environment: [APP_PORT=8090]
   load-balancer-round-robin:
     build: ./load_balancer
-    ports:
-      - 9000:9000
+    ports: [9000:9000]
     environment:
       - APP_PORT=9000
       - PING_TIMEOUT_MS=100

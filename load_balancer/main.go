@@ -22,14 +22,6 @@ import (
 var LOGGER = log.New(os.Stdout, "INFO:", log.Ldate)
 
 func main() {
-	// config := configs.NewStub(
-	// 	"8086",
-	// 	100,
-	// 	100,
-	// 	[]string{"http://localhost:8081", "http://localhost:8082", "http://localhost:8083", "http://localhost:8090"},
-	// 	[]string{"/call", "/call", "/call", "/call"},
-	// 	[]string{"/ping", "/ping", "/ping", "/ping"},
-	// )
 	config := configs.New()
 	appClient := clients.New()
 	appAddresses := createApplicationServiceAddresses(config)
