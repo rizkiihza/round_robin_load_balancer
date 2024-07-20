@@ -92,7 +92,7 @@ func createApplicationServiceAddresses(config *configs.Config) []*model.Applicat
 	addresses := make([]*model.ApplicationServiceAddress, 0)
 	for i := 0; i < len(config.GetApplicationServiceHosts()); i++ {
 		address := model.NewApplicationServiceAddress(
-			fmt.Sprintf("app_service-%d", i),
+			fmt.Sprintf("key-%d", i),
 			config.GetApplicationServiceHosts()[i],
 			config.GetApplicationServiceCallPaths()[i],
 			config.GetApplicationServicePingPaths()[i])
