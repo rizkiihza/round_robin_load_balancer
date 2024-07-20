@@ -32,7 +32,7 @@ func TestHandler_HandleRequest(t *testing.T) {
 			t.Errorf("not expecting error when getting data")
 		}
 
-		expectedResponse := "500 - Internal Server error"
+		expectedResponse := "{\"error\" : \"500 - Internal Server error\"}\n"
 		if string(data[:]) != expectedResponse {
 			t.Errorf("expecting message to be %s", expectedResponse)
 		}
@@ -65,5 +65,4 @@ func TestHandler_HandleRequest(t *testing.T) {
 			t.Errorf("expecting message to be %s", expectedResponse)
 		}
 	})
-
 }
