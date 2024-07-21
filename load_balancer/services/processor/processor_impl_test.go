@@ -22,18 +22,15 @@ func TestProcessorImpl_ForwardRequest(t *testing.T) {
 				"app_service-0",
 				"localhost:8000",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-1",
 				"localhost:8001",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-2",
 				"localhost:8001",
-				"/",
 				"/",
 			),
 		}
@@ -52,7 +49,8 @@ func TestProcessorImpl_ForwardRequest(t *testing.T) {
 			Return([]string{
 				"app_service-0",
 				"app_service-1",
-				"app_service-2"})
+				"app_service-2",
+			})
 		processor_response := http.Response{
 			StatusCode: http.StatusOK,
 			Body:       io.NopCloser(bytes.NewBufferString("Hello World")),
@@ -94,18 +92,15 @@ func TestProcessorImpl_ForwardRequest(t *testing.T) {
 				"app_service-0",
 				"localhost:8000",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-1",
 				"localhost:8001",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-2",
 				"localhost:8001",
-				"/",
 				"/",
 			),
 		}
@@ -147,5 +142,4 @@ func TestProcessorImpl_ForwardRequest(t *testing.T) {
 			t.Errorf("expecting error message to be %s, instead getting %s", expectedErrorMessage, err.Error())
 		}
 	})
-
 }

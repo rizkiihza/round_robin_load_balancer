@@ -13,18 +13,15 @@ func TestRoundRobinLoadBalancerImpl_GetNextServiceKey(t *testing.T) {
 				"app_service-0",
 				"localhost:8000",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-1",
 				"localhost:8001",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-2",
 				"localhost:8001",
-				"/",
 				"/",
 			),
 		}
@@ -64,36 +61,30 @@ func TestRoundRobinLoadBalancerImpl_GetNextServiceKey(t *testing.T) {
 				"app_service-0",
 				"localhost:8000",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-1",
 				"localhost:8001",
-				"/",
 				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-2",
 				"localhost:8002",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-3",
 				"localhost:8003",
-				"/",
 				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-4",
 				"localhost:8004",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-5",
 				"localhost:8005",
-				"/",
 				"/",
 			),
 		}
@@ -161,18 +152,15 @@ func TestRoundRobinLoadBalancerImpl_GetNextServiceKey(t *testing.T) {
 				"app_service-0",
 				"localhost:8000",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-1",
 				"localhost:8001",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-2",
 				"localhost:8001",
-				"/",
 				"/",
 			),
 		}
@@ -201,36 +189,30 @@ func TestRoundRobinLoadBalancerImpl_GetNextServiceKey(t *testing.T) {
 				"app_service-0",
 				"localhost:8000",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-1",
 				"localhost:8001",
-				"/",
 				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-2",
 				"localhost:8001",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-3",
 				"localhost:8001",
-				"/",
 				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-4",
 				"localhost:8001",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-5",
 				"localhost:8001",
-				"/",
 				"/",
 			),
 		}

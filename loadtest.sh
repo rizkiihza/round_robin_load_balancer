@@ -1,5 +1,5 @@
 while true; do
-    curl --location 'localhost:9000' \
+    curl --location 'localhost:9000/call' \
         --header 'Content-Type: application/json' \
         --data '{
     "Hello": "world"

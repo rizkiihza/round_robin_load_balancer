@@ -28,18 +28,15 @@ func TestPeriodicHealthcheck_PeriodicalCheck(t *testing.T) {
 				"app_service-0",
 				"localhost:8000",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-1",
 				"localhost:8001",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-2",
 				"localhost:8001",
-				"/",
 				"/",
 			),
 		}
@@ -83,18 +80,15 @@ func TestPeriodicHealthcheck_PeriodicalCheck(t *testing.T) {
 				"app_service-0",
 				"localhost:8000",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-1",
 				"localhost:8001",
 				"/",
-				"/",
 			),
 			model.NewApplicationServiceAddress(
 				"app_service-1",
 				"localhost:8001",
-				"/",
 				"/",
 			),
 		}
@@ -114,7 +108,6 @@ func TestPeriodicHealthcheck_PeriodicalCheck(t *testing.T) {
 		}
 		done <- struct{}{}
 	})
-
 }
 
 func TestPeriodicHealthcheck_GetHealthyServiceKeys(t *testing.T) {

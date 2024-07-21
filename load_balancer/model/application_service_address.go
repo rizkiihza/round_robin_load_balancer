@@ -3,15 +3,13 @@ package model
 type ApplicationServiceAddress struct {
 	key      string
 	host     string
-	callPath string
 	pingPath string
 }
 
-func NewApplicationServiceAddress(key string, host string, callPath string, pingPath string) *ApplicationServiceAddress {
+func NewApplicationServiceAddress(key string, host string, pingPath string) *ApplicationServiceAddress {
 	return &ApplicationServiceAddress{
 		key:      key,
 		host:     host,
-		callPath: callPath,
 		pingPath: pingPath,
 	}
 }
@@ -22,10 +20,6 @@ func (as ApplicationServiceAddress) GetKey() string {
 
 func (as ApplicationServiceAddress) GetHost() string {
 	return as.host
-}
-
-func (as ApplicationServiceAddress) GetCallPath() string {
-	return as.callPath
 }
 
 func (as ApplicationServiceAddress) GetPingPath() string {

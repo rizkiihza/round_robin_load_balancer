@@ -94,7 +94,6 @@ func createApplicationServiceAddresses(config *configs.Config) []*model.Applicat
 		address := model.NewApplicationServiceAddress(
 			fmt.Sprintf("key-%d", i),
 			config.GetApplicationServiceHosts()[i],
-			config.GetApplicationServiceCallPaths()[i],
 			config.GetApplicationServicePingPaths()[i])
 		addresses = append(addresses, address)
 	}

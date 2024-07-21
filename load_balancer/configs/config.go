@@ -11,7 +11,6 @@ type Config struct {
 	pingTimeoutMs               int
 	checkPeriodMs               int
 	applicationServiceHosts     []string
-	applicationServiceCallPaths []string
 	applicationServicePingPaths []string
 }
 
@@ -20,15 +19,13 @@ func NewStub(
 	pingTimeoutMs int,
 	checkPeriodMs int,
 	applicationServiceHosts []string,
-	applicationServiceCallPaths []string,
-	applicationServicePingPaths []string) *Config {
-
+	applicationServicePingPaths []string,
+) *Config {
 	return &Config{
 		appPort:                     appPort,
 		pingTimeoutMs:               pingTimeoutMs,
 		checkPeriodMs:               checkPeriodMs,
 		applicationServiceHosts:     applicationServiceHosts,
-		applicationServiceCallPaths: applicationServiceCallPaths,
 		applicationServicePingPaths: applicationServicePingPaths,
 	}
 }
@@ -38,7 +35,6 @@ func New() *Config {
 	pingTimeoutMsString := os.Getenv("PING_TIMEOUT_MS")
 	checkPeriodMsString := os.Getenv("CHECK_PERIOD_MS")
 	applicationServiceHosts := strings.Split(os.Getenv("APPLICATION_SERVICE_HOSTS"), ",")
-	applicationServiceCallPaths := strings.Split(os.Getenv("APPLICATION_SERVICE_CALL_PATHS"), ",")
 	applicationServicePingPaths := strings.Split(os.Getenv("APPLICATION_SERVICE_PING_PATHS"), ",")
 
 	pingTimeoutMs, err := strconv.Atoi(pingTimeoutMsString)
@@ -54,7 +50,6 @@ func New() *Config {
 		pingTimeoutMs:               pingTimeoutMs,
 		checkPeriodMs:               checkPeriodMs,
 		applicationServiceHosts:     applicationServiceHosts,
-		applicationServiceCallPaths: applicationServiceCallPaths,
 		applicationServicePingPaths: applicationServicePingPaths,
 	}
 }
@@ -73,10 +68,6 @@ func (c *Config) GetCheckPeriodMs() int {
 
 func (c *Config) GetApplicationServiceHosts() []string {
 	return c.applicationServiceHosts
-}
-
-func (c *Config) GetApplicationServiceCallPaths() []string {
-	return c.applicationServiceCallPaths
 }
 
 func (c *Config) GetApplicationServicePingPaths() []string {

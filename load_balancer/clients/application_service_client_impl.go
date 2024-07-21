@@ -11,15 +11,14 @@ import (
 
 var LOGGER = log.New(os.Stdout, "client INFO:", log.Ldate)
 
-type ApplicationServiceClientImpl struct {
-}
+type ApplicationServiceClientImpl struct{}
 
 func New() *ApplicationServiceClientImpl {
 	return &ApplicationServiceClientImpl{}
 }
 
 func (as *ApplicationServiceClientImpl) Call(ctx context.Context, request *http.Request, appService *model.ApplicationServiceAddress) (*http.Response, error) {
-	url := fmt.Sprintf("%s%s", appService.GetHost(), appService.GetCallPath())
+	url := fmt.Sprintf("%s%s", appService.GetHost(), request.URL.Path)
 	req, err := http.NewRequestWithContext(ctx, "POST", url, request.Body)
 	if err != nil {
 		LOGGER.Println("got error when creating request", err.Error())
